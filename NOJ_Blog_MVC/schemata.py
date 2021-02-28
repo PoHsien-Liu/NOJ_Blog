@@ -5,6 +5,7 @@ import datetime
 connect('ProjectDb')
 
 class User(Document, UserMixin):
+    userid = IntField(required=True)
     account = StringField(max_length=20, required=True)
     password = StringField(required=True)
     nickname = StringField(max_length=20, default=account)
@@ -47,9 +48,10 @@ post2 = BlogPost(
 post1.save()
 post2.save()
 
+print( len(User.objects()) )
 user = User.objects.all()
 print("All users:")
 for users in user:
-    print( 'Account:' + users.account + ',Password:' + users.password  )
+    print( 'Account:' + users.account + ',Password:' + users.password + ", UserId: " + str(users.userid) )
 print("Posts count: " + str(BlogPost.objects.count()) )
 

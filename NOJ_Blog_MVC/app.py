@@ -18,8 +18,8 @@ login_manager.session_protection = "strong"
 login_manager.login_view = 'login'
 
 @login_manager.user_loader
-def load_user(user_account):
-    return User.objects(account=user_account).first()
+def load_user(user_id):
+    return User.objects(userid=user_id).first()
 
 @app.route('/')
 def index():
@@ -30,6 +30,7 @@ def register():
     if request.method == 'POST':
         connect('ProjectDb')
         newUser = User(
+            userid = len(User.objects()) + 1,
             account = request.form.get('account'),
             password = bcrypt.generate_password_hash( request.form.get('password') ),
             nickname = request.form.get('nickname')
@@ -130,4 +131,4 @@ def show_profile(account):
         return 'User not found'
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, port=8080)
