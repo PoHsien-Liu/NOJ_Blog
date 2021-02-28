@@ -3,13 +3,17 @@
 {% block title %} HomePage {% endblock %}
 
 {% block main %} 
+
+    {% if NotLogin %}
+        <form action="/login">
+            <input type="submit" value="Login">
+        </form>
+        <form action="/register">
+            <input type="submit" value="Register">
+        </form>
+    {% endif %}
+
     <p>Welcome to NOJ blog </p>
-    <form action="/login">
-        <input type="submit" value="Login">
-    </form>
-    <form action="/register">
-        <input type="submit" value="Register">
-    </form>
 
     <h3>Public posts</h3>
     {% if posts_list.count() > 0 %}
@@ -33,10 +37,4 @@
         <p>No post yet</p>
     {% endif %}
 
-{% endblock %}
-
-{% block script %}
-    {% if err %}
-        flash( {{err}} )
-    {% endif %}
 {% endblock %}

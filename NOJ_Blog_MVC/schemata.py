@@ -29,24 +29,6 @@ class BlogPost(Document):
     content = StringField(required=True)
     isPublic = BooleanField(required=True)
 
-BlogPost.objects.all().delete()
-post1 = BlogPost(
-    postid = 1,
-    title = 'test1',
-    author= 'RobertLiu',
-    content = 'Test1',
-    isPublic = True
-)   
-post2 = BlogPost(
-    postid = 2,
-    title = 'test2',
-    author= 'RobertLiu',
-    content = 'lorem30',
-    isPublic = False
-)
-
-post1.save()
-post2.save()
 
 print( len(User.objects()) )
 user = User.objects.all()

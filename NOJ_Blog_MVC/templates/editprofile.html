@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %} EditProfile {% endblock %}
+
+{% block main %}
+    <form action="POST">
+        Nickname: <input name="nickname" type="text" placeholder={{ori_nickname}} autofocus required>
+    
+        <input type="submit" value="Update">
+    </form>
+{% endblock %}
