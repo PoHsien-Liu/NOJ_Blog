@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %} Create a new post. {% endblock %}
+
+{% block main %}
+    <form method="POST">
+        Title: <input name="title" type="text" autofocus required>
+        Content: <input name='content' type="text" required>
+        Public or not: 
+        <select name="isPublic">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+        
+        <input type="submit" value="Create">
+    </form>
+{% endblock %}

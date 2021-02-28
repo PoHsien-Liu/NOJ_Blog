@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %} EditPost {% endblock %}
+
+{% block main %} 
+
+    <form action="POST">
+        Title: <input name="title" type="text" autofocus required>
+        Content: <input name='content' type="text" required>
+        Public or not: 
+        <select name="isPublic">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+        
+        <input type="submit" value="Create">
+    </form>
+    
+{% endblock %}

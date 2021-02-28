@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} {{user.nickname}} {% endblock %}
+
+{% block main %} 
+    <p> Welcome to {{user.nickname}}'s blog!!! </p>
+
+    {% if is_author %}
+        <form action="/addpost">
+            <input type="submit" value="Create a new post!">
+        </form>
+        <form action="/logout">
+            <input type="submit" value="Log out">
+        </form>
+    {% endif %}
+
+    {% if posts_list.count() > 0 %}
+        <table class=posts_list>
+            <thead>
+                <th>Author</th>
+                <th>Title</th>
+                <th>UpdateTime</th>
+                <th>Link</th>
+                {% if is_author %}
+                    <th>Edit</th>
+                    <th>Delete</th>
+                {% endif %}
+            </thead>
+            {% for post in  posts_list %}
+            <tr>
+                <td> {{ post.author }} </td>
+                <td> {{ post.title }} </td>
+                <td> {{ post.update_time }} </td>
+                <td> <a href="{{ url_for('full_post_page', pid = post.postid) }}">See more! </td>
+                {% if is_author %}
+                    <td> <a href="{{ url_for('edit_post', pid = post.postid) }}">Edit </td>
+                    <td> <a href="{{ url_for('delete_post', pid = post.postid) }}">Delete </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No post yet</p>
+    {% endif %}
+{% endblock %}

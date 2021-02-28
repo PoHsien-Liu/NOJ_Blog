@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %} HomePage {% endblock %}
+
+{% block main %} 
+    <p>Welcome to NOJ blog </p>
+    <form action="/login">
+        <input type="submit" value="Login">
+    </form>
+    <form action="/register">
+        <input type="submit" value="Register">
+    </form>
+
+    <h3>Public posts</h3>
+    {% if posts_list.count() > 0 %}
+        <table class=posts_list>
+            <thead>
+                <th>Author</th>
+                <th>Title</th>
+                <th>UpdateTime</th>
+                <th>Link</th>
+            </thead>
+            {% for post in  posts_list %}
+            <tr>
+                <td> {{ post.author }} </td>
+                <td> {{ post.title }} </td>
+                <td> {{ post.update_time }} </td>
+                <td> <a href="{{ url_for('full_post_page', pid = post.postid) }}">See more! </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No post yet</p>
+    {% endif %}
+
+{% endblock %}
+
+{% block script %}
+    {% if err %}
+        flash( {{err}} )
+    {% endif %}
+{% endblock %}
