@@ -153,7 +153,10 @@ def delete_post(pid):
 def full_post_page(pid):
     post = model.get_post_by_id(pid)
     if post:
-        return render_template('full_post_page.html', post=post )
+        if post.isPublic == False and post.author != current_user.account:
+            return model.show_error("Permission denied!")
+        else:
+            return render_template('full_post_page.html', post=post )
     else:
         return model.show_error("The post is not found.")
 
