@@ -11,15 +11,6 @@ class User(Document, UserMixin):
     nickname = StringField(max_length=20, default=account)
     blogPostList = ListField()
 
-    def is_authenticated(self):
-        return True
-    def is_active(self):
-        return True
-    def is_anonymous(self):
-        return False
-    def get_id(self): 
-        return str(self.id)   
-
 class BlogPost(Document):
     postid = IntField(required=True)
     title = StringField(required=True, max_length=200)
@@ -30,10 +21,13 @@ class BlogPost(Document):
     isPublic = BooleanField(required=True)
 
 
-print( len(User.objects()) )
-user = User.objects.all()
+users = User.objects.all()
 print("All users:")
-for users in user:
-    print( 'Account:' + users.account + ',Password:' + users.password + ", UserId: " + str(users.userid) )
-print("Posts count: " + str(BlogPost.objects.count()) )
+for user in users:
+    print( 'Account:' + user.account + ',Password:' + user.password + ", UserId: " + str(user.userid) )
+print("All posts:")
+posts = BlogPost.objects.all()
+for post in posts:
+    print( 'PostId:' + str(post.postid) + ', Author:' + post.author + ", Content: " + post.content )
+
 

@@ -1,3 +1,4 @@
+from flask import render_template
 from mongoengine import *
 from schemata import *
 import datetime
@@ -21,3 +22,9 @@ def get_post_by_id(pid):
 
 def get_user_by_account(account):
     return User.objects(account=account).first()
+
+def get_user_by_userid(userid):
+    return User.objects(userid=userid).first()
+
+def show_error(err):
+    return render_template("errorpage.html", err=err)
